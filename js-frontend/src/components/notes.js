@@ -3,9 +3,22 @@ class Notes {
     constructor() {
         this.notes = []
         this.adapter = new NotesAdapter()
-        this.bindEventListeners()
+        this.initBindingsAndEventListeners()
         this.fetchAndLoadNotes()
     }
+    
+    initBindingsAndEventListeners(){
+        this.notesContainer = document.getElementById('notes-container')
+        this.newNoteBody = document.getElementById('new-note-body')
+        this.noteForm = document.getElementById('new-note-form')
+        this.noteForm.addEventListener('submit', this.createNote.bind(this))
+    }
+
+    createNote(e) {
+        e.preventDefault()
+        console.log(this.newNoteBody.value);
+    }
+
 
     fetchAndLoadNotes() {
         this.adapter
@@ -19,13 +32,8 @@ class Notes {
             this.render()
         })
     }
-
-    bindEventListeners(){
-
-    }
-
+    
     render() {
-        const notesContainer = document.getElementById('notes-container')
-        notesContainer.innerHTML = `${this.notes.map(note => `<li>${note.body}</li>`).join('')}`
+        this.notesContainer.innerHTML = `${this.notes.map(note => note.renderLi()).join('')}`
     }
 }
