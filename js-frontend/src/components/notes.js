@@ -28,14 +28,25 @@ class Notes {
     }
 
     handleNoteClick(e) {
+        this.toggleNote(e)
+    }
+
+    toggleNote(e) {
         const li = e.target
         li.contentEditable = "true"
         li.focus()
         li.classList.add('editable')
     }
-
+    
     updateNote(e){
-        console.log('in updateNote()');
+        e.stopPropagation()
+        const li = e.target
+        li.contentEditable = "false"
+        li.classList.remove('editable')
+        const newValue = li.innerHTML
+        const id = li.dataset.id
+        console.log(id);
+        this.adapter.updateNote(newValue, id)
     }
 
     fetchAndLoadNotes() {

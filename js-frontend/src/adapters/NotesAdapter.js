@@ -20,4 +20,20 @@ class NotesAdapter {
         })
         .then(res => res.json())
     }
+    
+    updateNote(value, id) {
+        console.log('updating note');
+        const note = {
+            body: value
+        }
+        return fetch(this.baseurl + `/${id}`, {
+            method: 'PATCH', 
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ note })
+        })
+        .then(res => res.json())
+        
+    }
 }

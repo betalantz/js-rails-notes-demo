@@ -22,8 +22,11 @@ class Api::V1::NotesController < ApplicationController
     end
     
     def update
-        note = Note.find(params[:id])
-        note = Note.update(note_params)
+        if params[:id] != 'undefined'
+            note = Note.find(params[:id])
+            note.update(note_params)
+            render json: note, status: 200
+        end
     end
     
     def destroy
