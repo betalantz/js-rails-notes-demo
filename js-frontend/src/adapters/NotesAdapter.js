@@ -6,4 +6,18 @@ class NotesAdapter {
     getNotes() {
         return fetch(this.baseurl).then(res => res.json())
     }
+
+    createNote(value){
+        const note = {
+            body: value
+        }
+        return fetch(this.baseurl, {
+            method: 'POST', 
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ note })
+        })
+        .then(res => res.json())
+    }
 }
