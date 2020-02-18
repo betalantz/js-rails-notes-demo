@@ -26,8 +26,6 @@ class Notes {
 
     render() {
         const notesContainer = document.getElementById('notes-container')
-        notesContainer.innerHTML = 'my notes here'
-        console.log('my notes are...', this.notes);
-
+        notesContainer.innerHTML = `${this.notes.map(note => `<li>${note.body}</li>`).join('')}`
     }
 }
