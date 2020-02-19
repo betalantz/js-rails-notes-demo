@@ -5,6 +5,6 @@ class Note {
     }
 
     renderLi(){
-        return `<li data-id=${this.id}>${this.body}<a class="delete-note-link"> Delete</a></li>`
+        return `<li data-id=${this.id}>${this.body}<a class="delete-note-link">Delete</a></li>`
     }
 }

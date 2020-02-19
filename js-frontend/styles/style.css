@@ -25,7 +25,11 @@ ul {
 
 .delete-note-link {
     color: red;
-
+    font-size: .5em;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 10px;
 }
 
 .editable {
