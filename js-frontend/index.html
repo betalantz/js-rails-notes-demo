@@ -8,6 +8,12 @@
 </head>
 <body>
     <div class="container">
+        <div id="login-container">
+            <form id="login-form">
+                <input type="text" id="new-user">
+                <input type="submit" value="Login">
+            </form>
+        </div>
         <h1>Note App</h1>
         <div id="new-note-container">
             <form id="new-note-form">
@@ -20,6 +26,7 @@
         </ul>
     </div>
     <script src="src/adapters/NotesAdapter.js"></script>
+    <script src="src/components/users.js"></script>
     <script src="src/components/note.js"></script>
     <script src="src/components/notes.js"></script>
     <script src="src/components/app.js"></script>
