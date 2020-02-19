@@ -28,9 +28,14 @@ class Notes {
     }
 
     handleNoteClick(e) {
-        this.toggleNote(e)
+        if (e.target.classList.contains('delete-note-link')){
+            console.log('will delete', e.target.parentNode);
+            this.deleteNote(e)
+        } else {
+            this.toggleNote(e)
+        }
     }
-
+    
     toggleNote(e) {
         const li = e.target
         li.contentEditable = "true"
@@ -39,21 +44,29 @@ class Notes {
     }
     
     updateNote(e){
-        e.stopPropagation()
+        // e.stopPropagation()
         const li = e.target
         li.contentEditable = "false"
         li.classList.remove('editable')
         const newValue = li.innerHTML
         const id = li.dataset.id
-        console.log(id);
-        this.adapter.updateNote(newValue, id)
+        if (id) {
+            this.adapter.updateNote(newValue, id)
+        }
+    }
+    
+    deleteNote(e) {
+        const li = e.target.parentNode
+        const id = li.dataset.id
+        this.adapter.deleteNote(id)
+        li.remove()
     }
 
     fetchAndLoadNotes() {
         this.adapter
         .getNotes()
         .then(notes => {
-            notes.forEach(note => {
+            notes.sort((a, b) => a.id - b.id).forEach(note => {
                 this.notes.push(new Note(note))
             });
         })

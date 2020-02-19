@@ -32,3 +32,7 @@ ul {
     border: 1px solid black;
     padding: 20px;
 }
+
+.hidden {
+    visibility: hidden;
+}

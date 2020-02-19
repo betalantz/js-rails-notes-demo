@@ -22,7 +22,6 @@ class NotesAdapter {
     }
     
     updateNote(value, id) {
-        console.log('updating note');
         const note = {
             body: value
         }
@@ -35,5 +34,12 @@ class NotesAdapter {
         })
         .then(res => res.json())
         
+    }
+
+    deleteNote(id) {
+        return fetch(this.baseurl + `/${id}`, {
+            method: 'DELETE'
+        })
+        .then(res => res.json())
     }
 }
