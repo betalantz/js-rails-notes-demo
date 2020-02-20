@@ -3,11 +3,17 @@ class Notes {
     constructor() {
         this.notes = []
         this.adapter = new NotesAdapter()
+        this.userAdapter = new UsersAdapter()
+
         this.initBindingsAndEventListeners()
         this.fetchAndLoadNotes()
     }
     
     initBindingsAndEventListeners(){
+        this.loginForm = document.getElementById('login-form')
+        this.newUserInput = document.querySelector('#new-user')
+        this.loginForm.addEventListener('submit', this.loginUser.bind(this))
+
         this.notesContainer = document.getElementById('notes-container')
         this.body = document.querySelector('body')
         this.newNoteBody = document.getElementById('new-note-body')
@@ -19,8 +25,9 @@ class Notes {
 
     createNote(e) {
         e.preventDefault()
+        const curr_user = localStorage.getItem('currentUser')
         const value = this.newNoteBody.value;
-        this.adapter.createNote(value).then(note => {
+        this.adapter.createNote(value, curr_user).then(note => {
            this.notes.push(new Note(note))
            this.newNoteBody.value = ''
            this.render()
@@ -76,6 +83,36 @@ class Notes {
     }
     
     render() {
-        this.notesContainer.innerHTML = `${this.notes.map(note => note.renderLi()).join('')}`
+        const curr_user = localStorage.getItem('currentUser')
+        if (curr_user) {
+            this.notesContainer.innerHTML = `${this.notes.filter(note => note.user_id == curr_user).map(note => note.renderLi()).join('')}`
+        } else {
+            this.notesContainer.innerHTML = 'Please login!'
+        }
+    }
+
+    loginUser(e){
+        e.preventDefault()
+        console.log('e.target: ', e.target.childNodes[3].value);
+        const btn = e.target.childNodes[3]
+        const btnText = e.target.childNodes[3].value
+        if (btnText == 'Login') {
+            const value = this.newUserInput.value
+            this.userAdapter.loginUser(value)
+                .then(user => {
+                    localStorage.setItem('currentUser', parseInt(user.id))
+                    console.log(`currentUser ${user.username} set with id: ${localStorage.getItem('currentUser')}`);
+                })
+                .then(() => this.render())
+            this.newUserInput.value = ""
+            btn.setAttribute('value', 'Logout')
+        } else {
+            localStorage.clear()
+            location.reload()
+            btn.setAttribute('value', 'Login')
+        }
+        
     }
 }
+
+// .filter(note => note.user_id == curr_user)
