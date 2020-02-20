@@ -1,5 +1,5 @@
 class Notes {
-    //where the meat of the program will live
+    //where most of the logic lives; could be renamed PageManger
     constructor() {
         this.notes = []
         this.adapter = new NotesAdapter()
@@ -51,7 +51,6 @@ class Notes {
     }
     
     updateNote(e){
-        // e.stopPropagation()
         const li = e.target
         li.contentEditable = "false"
         li.classList.remove('editable')
@@ -91,6 +90,9 @@ class Notes {
         }
     }
 
+    // loginUser() would be better on the Users class, but needs access to render() here
+    // could use inheritance to make render() a property of Users too
+
     loginUser(e){
         e.preventDefault()
         console.log('e.target: ', e.target.childNodes[3].value);
@@ -114,5 +116,3 @@ class Notes {
         
     }
 }
-
-// .filter(note => note.user_id == curr_user)

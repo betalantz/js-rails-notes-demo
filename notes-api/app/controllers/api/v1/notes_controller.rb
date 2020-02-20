@@ -12,7 +12,6 @@ class Api::V1::NotesController < ApplicationController
     end
     
     def create
-        # byebug
         curr_user = User.find_by(id: params[:note][:user_id])
         note = curr_user.notes.build(note_params)
         if note.save

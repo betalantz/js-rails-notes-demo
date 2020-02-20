@@ -4,7 +4,6 @@ class UsersAdapter {
     }
 
     loginUser(value){
-        console.log('sending fetch', value);
         const user = {
             username: value
         }
@@ -16,6 +15,5 @@ class UsersAdapter {
             body: JSON.stringify({ user })
         })
         .then(res => res.json())
-        // .then(data => console.log(data))
     }
 }
