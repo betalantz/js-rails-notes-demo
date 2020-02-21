@@ -3,6 +3,7 @@ body {
     font-weight: 300;
     font-size: 1.3em;
     line-height: 1.6em;
+    margin: 25px 25px;
 }
 
 a {
@@ -37,6 +38,3 @@ ul {
     padding: 20px;
 }
 
-.hidden {
-    visibility: hidden;
-}

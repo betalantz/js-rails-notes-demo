@@ -7,10 +7,12 @@ class NotesAdapter {
         return fetch(this.baseurl).then(res => res.json())
     }
 
-    createNote(value){
+    createNote(value, id){
         const note = {
-            body: value
+            body: value,
+            user_id: id
         }
+        console.log('req body obj: ', note["user_id"]);
         return fetch(this.baseurl, {
             method: 'POST', 
             headers: {
