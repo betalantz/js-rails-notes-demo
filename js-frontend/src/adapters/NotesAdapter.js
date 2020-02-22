@@ -20,7 +20,13 @@ class NotesAdapter {
             },
             body: JSON.stringify({ note })
         })
+        .then(res => {
+            
+            console.log(res.status)
+            return res
+        })
         .then(res => res.json())
+        .catch((message) => console.log(message))
     }
     
     updateNote(value, id) {
